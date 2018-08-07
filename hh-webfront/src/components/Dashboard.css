@@ -4,5 +4,6 @@
 }
 
 .list-closed text {
+    fill: green;
     text-decoration: line-through;
 }

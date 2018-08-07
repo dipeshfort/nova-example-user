@@ -50,17 +50,18 @@ export const ReminderList = (props) => {
                                 transform={`translate(${posX}, ${posY})`}
                             >
                                 <circle cx="10" cy="10" r="10" strokeWidth="2" stroke="#002B7F" fill="transparent" />
-                                <text x="25" y="15" fill="purple" >
-                                    { reminder.remindDate }
+                                <text x="25" y="15" >
+                                    <tspan fill="purple" className="text-date">{ reminder.remindDate }</tspan>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <Link style={{textDecoration: "none"}} 
+                                        to={`/reminders/${reminder.id}`}>
+                                        <tspan fontSize="20" fill="black" >
+                                            <tspan>{reminder.title}</tspan>
+                                            &nbsp;&nbsp;
+                                            <tspan fontWeight="200" fill="black">{reminder.amount} €</tspan>
+                                        </tspan>
+                                    </Link>
                                 </text>
-                                <Link style={{textDecoration: "none"}} 
-                                    to={`/reminders/${reminder.id}`}>
-                                    <text fontSize="20" x="125" y="15" fill="black" >
-                                        <tspan>{reminder.title}</tspan>
-                                        &nbsp;&nbsp;
-                                        <tspan fontWeight="200" fill="black">{reminder.amount} €</tspan>
-                                    </text>
-                                </Link>
                             </g>
                         </g>
                     )
