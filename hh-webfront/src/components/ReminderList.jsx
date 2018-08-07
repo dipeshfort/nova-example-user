@@ -10,14 +10,15 @@ export const ReminderList = (props) => {
                 return (
                     <div className="row" key={reminder.id}>
                         <div className="col-2"> {reminder.remindDate } </div>
-                        <div className="col-6"> 
-                            <p><strong>{ reminder.title }</strong></p> 
+                        <div className="col-8"> 
+                            <p>
+                                <Link to={`/reminders/${reminder.id}`}>
+                                    <strong>{ reminder.title }</strong>
+                                </Link>
+                            </p> 
                             <p> {reminder.comments } </p>
                         </div>
                         <div className="col-2"> { reminder.amount } €</div>
-                        <div className="col-2"> 
-                            <Link to={`/reminders/${reminder.id}`} className="btn btn-secondary btn-sm">Edit</Link>
-                        </div>
                     </div>
                 )
             })}
