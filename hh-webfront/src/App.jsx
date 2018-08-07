@@ -1,10 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom';
 import {
-    BrowserRouter, Route, Switch, Link
-} from 'react-router-dom'
+    Route, Switch
+} from 'react-router-dom';
 
-import './styles.css';
+import { MainNav } from './components/MainNav';
 
 // Components
 import { ReminderList } from './components/ReminderList';
@@ -15,13 +14,11 @@ import { ReminderService } from './services/reminder.service';
 
 const reminderService = new ReminderService();
 
-const App = () => {
+export const App = () => {
     return (
         <React.Fragment>
-        <nav>
-            <Link to="/">Home</Link>
-        </nav>
         <main>
+            <MainNav />
             <Switch>
                 <Route 
                     exact
@@ -46,9 +43,3 @@ const App = () => {
         </React.Fragment>
     );
 };
-
-render((
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-), document.querySelector('#root'));
