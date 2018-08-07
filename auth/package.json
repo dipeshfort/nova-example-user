@@ -1,0 +1,24 @@
+{
+  "name": "reminder-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "start": "yarn run build && DEBUG=reminder* node ./dist/index.js", 
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/debug": "^0.0.30",
+    "@types/express": "^4.11.1",
+    "@types/node": "^10.3.0",
+    "nodemon": "^1.17.5",
+    "typescript": "^2.9.1"
+  }
+}
