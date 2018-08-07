@@ -20,7 +20,9 @@ export class ReminderService {
             ...reminderData,
             status: "OPEN"
         };
-        return await fetch(REMINDERS_API, {
+        const api = REMINDERS_API;
+        console.info(`Creating reminder ${api}`);
+        return await fetch(api, {
             method: 'POST',
             cache: 'no-cache',
             headers: {
@@ -43,6 +45,17 @@ export class ReminderService {
                 "Content-Type": "application/json; charset=utf-8",
             },
             body: JSON.stringify(data)
+        }).then(resp => resp.json());
+    }
+    static async delete(reminderId) {
+        const api = `${REMINDERS_API}/${reminderId}`;
+        console.info(`Deleting ${api}`);
+        return await fetch(api, {
+            method: 'DELETE',
+            cache: 'no-cache',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            }
         }).then(resp => resp.json());
     }
 }

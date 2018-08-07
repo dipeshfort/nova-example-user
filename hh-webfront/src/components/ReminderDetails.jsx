@@ -21,6 +21,7 @@ class _ReminderDetails extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.save = this.save.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     fillReminder(reminder) {
@@ -61,6 +62,17 @@ class _ReminderDetails extends Component {
                 error
             })
         });
+    }
+
+    delete() {
+        ReminderService.delete(this.state.id)
+            .then(() => {
+                this.props.removeReminder(this.state.id);
+                this.props.history.push('/');
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     handleChange(event) {
@@ -132,6 +144,7 @@ class _ReminderDetails extends Component {
                     <div className="row">
                         <div className="col-6">
                             <button disabled={this.state.disabled} type="submit" className="btn btn-success btn-block">Update</button>
+                            <button disabled={this.state.disabled} onClick={this.delete} type="button" className="btn btn-danger btn-block">Delete</button>
                         </div>
                         <div className="col-6">
                             <Link to="/" className="btn btn-outline-secondary btn-block">Back</Link>
@@ -145,7 +158,7 @@ class _ReminderDetails extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        reminder: state.reminders.find(r => r.id === +props.match.params.id)
+        reminder: state.reminders.find(r => r.id === props.match.params.id)
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -154,6 +167,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'UPDATE_REMINDER',
                 payload: reminder
+            })
+        },
+        removeReminder: (reminderId) => {
+            dispatch({
+                type: 'REMOVE_REMINDER',
+                payload: reminderId
             })
         }
     }

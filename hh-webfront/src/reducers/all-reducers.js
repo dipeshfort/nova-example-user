@@ -14,11 +14,9 @@ export const allReducers = combineReducers({
                 return state;
             case 'UPDATE_REMINDER':
                 return update(state, action.payload);
-            case 'MARK_OPEN': 
-                return update(state, {
-                    id: action.payload,
-                    status: 'OPEN'
-                });
+            case 'REMOVE_REMINDER':
+                const removeId = action.payload;
+                return state.filter((r) => r.id !== removeId);
         }
 
         return state;
