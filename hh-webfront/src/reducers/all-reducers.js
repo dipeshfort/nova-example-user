@@ -12,12 +12,16 @@ export const allReducers = combineReducers({
                 reminder.status = "OPEN";
                 state.push(reminder);
                 return state;
+            case 'UPDATE_REMINDER':
+                return update(state, action.payload);
             case 'MARK_CLOSED':
-                return update(state, action.payload, {
+                return update(state, {
+                    id: action.payload,
                     status: 'CLOSED'
                 });
             case 'MARK_OPEN': 
-                return update(state, action.payload, {
+                return update(state, {
+                    id: action.payload,
                     status: 'OPEN'
                 });
         }
@@ -26,9 +30,9 @@ export const allReducers = combineReducers({
     }
 });
 
-function update(reminders, reminderId, updatePart) {
+function update(reminders, updatePart) {
     return reminders.map((reminder) => {
-        if (reminder.id !== reminderId) {
+        if (reminder.id !== updatePart.id) {
             return reminder;
         }
 

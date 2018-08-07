@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { dateFormat } from '../utils';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-export class ReminderDetails extends Component {
+class _ReminderDetails extends Component {
 
     constructor(props) {
         super(props);
@@ -9,7 +11,7 @@ export class ReminderDetails extends Component {
         const todayStr = dateFormat(new Date());
         this.state = {
             minremindDate: todayStr,
-            reminder: props.reminder
+            reminder: Object.assign({}, props.reminder)
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,7 +20,8 @@ export class ReminderDetails extends Component {
 
     save(event) {
         event.preventDefault();
-        console.log("SUBMIT", this.state.reminder);
+        this.props.updateReminder(this.state.reminder);
+        this.props.history.push('/');
     }
 
     handleChange(event) {
@@ -85,9 +88,30 @@ export class ReminderDetails extends Component {
                             value={this.state.reminder.comments}
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary">Update</button>
+                    <div className="row">
+                        <div className="col-6">
+                            <button type="submit" className="btn btn-success btn-block">Update</button>
+                        </div>
+                        <div className="col-6">
+                            <Link to="/" className="btn btn-outline-secondary btn-block">Back</Link>
+                        </div>
+                    </div>
                 </form>
             </section>
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateReminder: (updatePart) => {
+            dispatch({
+                type: 'UPDATE_REMINDER',
+                payload: updatePart
+            })
+        }
+    }
+
+}
+
+export const ReminderDetails = connect(null, mapDispatchToProps)(_ReminderDetails);

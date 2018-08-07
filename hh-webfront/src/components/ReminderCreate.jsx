@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { dateFormat } from '../utils';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class _ReminderCreate extends Component {
     constructor(props) {
@@ -95,7 +96,7 @@ class _ReminderCreate extends Component {
                             <button type="submit" className="btn btn-success btn-block">Add</button>
                         </div>
                         <div className="col-6">
-                            <button type="button" className="btn btn-outline-secondary btn-block">Back</button>
+                            <Link to="/" className="btn btn-outline-secondary btn-block">Back</Link>
                         </div>
                     </div>
                 </form>
