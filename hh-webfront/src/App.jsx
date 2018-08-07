@@ -6,11 +6,11 @@ import {
 import { MainNav } from './components/MainNav';
 
 // Components
-import { ReminderList } from './components/ReminderList';
 import { ReminderDetails } from './components/ReminderDetails';
 import { ReminderCreate } from './components/ReminderCreate';
 
 import { ReminderService } from './services/reminder.service';
+import { Dashboard } from './components/Dashboard';
 
 const reminderService = new ReminderService();
 
@@ -23,9 +23,7 @@ export const App = () => {
                 <Route 
                     exact
                     path='/' 
-                    render={
-                        () => <ReminderList reminders={ reminderService.getReminders() } />
-                    }
+                    render={() => <Dashboard reminderService={reminderService} />}
                 />
                 <Route 
                     exact

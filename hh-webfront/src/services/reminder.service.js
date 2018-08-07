@@ -6,14 +6,14 @@ import { dateFormat } from '../utils';
 
 export class ReminderService {
     constructor() {
-        this.reminders = reminders;
-    }
-
-    getReminders() {
-        return this.reminders.map((reminder) => {
+        this.reminders = reminders.map((reminder) => {
             reminder.remindDate = dateFormat(new Date(reminder.remindDate));
             return reminder;
-        })
+        });
+    }
+
+    getAll() {
+        return this.reminders;
     }
 
     create(reminderData) {
@@ -25,5 +25,17 @@ export class ReminderService {
             return reminder.id === id;
         });
         return result;
+    }
+
+    getOpen() {
+        return this.reminders.filter((reminder) => {
+            return reminder.status === 'OPEN';
+        });
+    }
+
+    getClosed() {
+        return this.reminders.filter((reminder) => {
+            return reminder.status === 'DONE';
+        });
     }
 }
