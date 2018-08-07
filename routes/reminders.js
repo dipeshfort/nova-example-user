@@ -43,7 +43,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    
+    logger.info("HERE");
     const reminderId = req.params.id;
     const data = req.body;
     

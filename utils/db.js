@@ -14,7 +14,15 @@ class Db {
 
     async query(query) {
         const client = await this.pool.connect()
-        return await client.query(query);
+        let result;
+        try {
+            result = await client.query(query);
+            client.release();
+        } catch(err) {
+            client.release();
+            throw err;
+        }
+        return result;
     }
 }
 
