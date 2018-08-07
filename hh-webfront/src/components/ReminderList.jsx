@@ -14,10 +14,16 @@ export class ReminderList extends Component {
 
             return (a.remindDate > b.remindDate)? 1: -1;
         });
+        
+        const containerHeight = 41 + (reminders.length * 40);
 
         return (
             <React.Fragment>
-            <section className="container">
+            <section style={{
+                height: `${containerHeight}px`,
+                overflow: 'hidden',
+                marginBottom: '15px'
+            }}>
                 <h3 style={{position: "relative"}}>
                     {this.props.title}&nbsp;
                     <span style={{fontSize: "0.5em", position: "absolute", top: "0px"}} className="badge badge-info">

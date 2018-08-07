@@ -42,8 +42,13 @@ export class DashboardTime extends Component {
         return `${now.toDateString()}, ${now.toLocaleTimeString()}`;
     }
     render() {
+        const style = {
+            width: "265px", 
+            textAlign: "left",
+            fontSize: "1.2em"
+        }
         return (
-            <span style={{ fontSize: "1.2em" }} className="badge badge-info">
+            <span style={style} className="badge badge-info">
                 {this.state.time}
             </span>
         );
