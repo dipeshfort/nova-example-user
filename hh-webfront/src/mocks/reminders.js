@@ -7,7 +7,7 @@ export const reminders = [
         comments: "",
         amount: 900.0,
         remindDate: "2018-08-05T00:00:00+03:00",
-        status: "DONE"
+        status: "OPEN"
     }, 
     {
         id: 2,

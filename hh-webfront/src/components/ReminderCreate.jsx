@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { dateFormat } from '../utils';
+import { connect } from 'react-redux';
 
-export class ReminderCreate extends Component {
-
+class _ReminderCreate extends Component {
     constructor(props) {
         super(props);
-
         const todayStr = dateFormat(new Date());
         this.state = {
             minremindDate: todayStr,
@@ -23,7 +22,8 @@ export class ReminderCreate extends Component {
 
     save(event) {
         event.preventDefault();
-        console.log("SUBMIT", this.state.reminder);
+        this.props.createReminder(this.state.reminder);
+        this.props.history.push('/');
     }
 
     handleChange(event) {
@@ -90,9 +90,30 @@ export class ReminderCreate extends Component {
                             value={this.state.reminder.comments}
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <div className="row">
+                        <div className="col-6">
+                            <button type="submit" className="btn btn-success btn-block">Add</button>
+                        </div>
+                        <div className="col-6">
+                            <button type="button" className="btn btn-outline-secondary btn-block">Back</button>
+                        </div>
+                    </div>
                 </form>
             </section>
         );
     }
 }
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+       createReminder: (reminder) => {
+            dispatch({
+               type: 'CREATE_REMINDER',
+               payload: reminder
+            });
+       }
+    }
+}
+export const ReminderCreate = connect(null, mapDispatchToProps)(_ReminderCreate);
+

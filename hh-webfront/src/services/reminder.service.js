@@ -26,16 +26,4 @@ export class ReminderService {
         });
         return result;
     }
-
-    getOpen() {
-        return this.reminders.filter((reminder) => {
-            return reminder.status === 'OPEN';
-        });
-    }
-
-    getClosed() {
-        return this.reminders.filter((reminder) => {
-            return reminder.status === 'DONE';
-        });
-    }
 }

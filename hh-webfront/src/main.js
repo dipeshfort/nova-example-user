@@ -4,12 +4,28 @@ import { render } from 'react-dom';
 import {
     BrowserRouter
 } from 'react-router-dom';
-import { App } from './App';
-
+import {
+    Provider
+} from 'react-redux';
+import {
+    createStore
+} from 'redux';
 import './styles.css';
+import { App } from './App';
+import { reminders } from "./mocks/reminders";
+
+import {
+    allReducers
+} from './reducers/all-reducers';
+
+const store = createStore(allReducers, {
+    reminders
+});
 
 render((
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
 ), document.querySelector('#root'));
