@@ -5,7 +5,10 @@ const logger = require('./logger');
 
 class Db {
     constructor() {
-        logger.trace("Init connection pool");
+        if (!process.env.DATABASE_URL) {
+            throw new Error('Database url not set.');
+        }
+        logger.trace(`Init connection pool`);
         this.pool = new Pool({
             connectionString: process.env.DATABASE_URL,
             ssl: false

@@ -2,7 +2,6 @@
     "restartable": "rs",
     "verbose": true,
     "env": {
-        "DEBUG": "hh*",
         "NODE_ENV": "development"
     },
     "ignore": [
