@@ -1,27 +1,30 @@
-node {
-    try {
+pipeline {
+    agent any
+    stages {
         stage ('clone') {
-            git branch: 'develop', url: 'https://github.com/dipeshy/hh-reminder.git'
+            steps {
+                git branch: 'develop', url: 'https://github.com/dipeshy/hh-reminder.git'    
+            }
         }
         
-        dir('webfront') {
-            stage ('install') {
-                sh 'node --version'
-                sh 'yarn install'
+        stage ('install, test') {
+            steps {
+                dir('infra-docker/tests') {
+                    sh "BUILD_NO=${env.BUILD_NUMBER} ./start.sh"
+                } 
             }
-            stage ('build, test') {
-                sh 'yarn test'
-            }
+
         }
-        notify('Success')
-    } catch (err) {
-        echo "Caught: ${err}"
-        notify("Error ${err}")
-        currentBuild.result = 'FAILURE'
     }
     
-    stage ('archiving') {
-        step([$class: 'JUnitResultArchiver', testResults: 'webfront/reports/*.xml'])
+    post { 
+        failure {
+            notify('Failure')
+        }
+        success { 
+            notify('Success')
+            step([$class: 'JUnitResultArchiver', testResults: 'infra-docker/tests/reports/*.xml'])
+        }
     }
 }
 
