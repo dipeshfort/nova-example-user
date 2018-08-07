@@ -1,6 +1,6 @@
 {
-  "name": "hh-hello-world",
-  "version": "0.0.0",
+  "name": "reminder-api",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
