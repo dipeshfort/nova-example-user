@@ -1,9 +1,0 @@
-
-.list-closed circle {
-    fill: rgba(100, 200, 100, 0.5)
-}
-
-.list-closed text {
-    fill: green;
-    text-decoration: line-through;
-}
