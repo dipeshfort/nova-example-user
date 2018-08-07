@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { dateFormat } from '../utils';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ReminderService } from "../services/reminder.service";
 
 class _ReminderCreate extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class _ReminderCreate extends Component {
                 comments: '',
                 amount: 0,
                 remindDate: todayStr
-            }
+            },
+            error: null
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -23,8 +25,15 @@ class _ReminderCreate extends Component {
 
     save(event) {
         event.preventDefault();
-        this.props.createReminder(this.state.reminder);
-        this.props.history.push('/');
+        ReminderService.create(this.state.reminder).then((reminder) => {
+            this.props.addReminder(reminder);
+            this.props.history.push('/');
+        }).catch((err) => {
+            console.error(err);
+            this.state.set({
+                error: err
+            })
+        });
     }
 
     handleChange(event) {
@@ -108,9 +117,9 @@ class _ReminderCreate extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-       createReminder: (reminder) => {
+       addReminder: (reminder) => {
             dispatch({
-               type: 'CREATE_REMINDER',
+               type: 'ADD_REMINDER',
                payload: reminder
             });
        }

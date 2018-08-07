@@ -6,7 +6,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 
 module.exports = {
     mode: "development",
-    entry: './src/main.js',
+    entry: ['babel-polyfill', './src/main.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js'

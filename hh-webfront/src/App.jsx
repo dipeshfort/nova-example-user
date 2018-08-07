@@ -9,10 +9,7 @@ import { MainNav } from './components/MainNav';
 import { ReminderDetails } from './components/ReminderDetails';
 import { ReminderCreate } from './components/ReminderCreate';
 
-import { ReminderService } from './services/reminder.service';
 import { Dashboard } from './components/Dashboard';
-
-const reminderService = new ReminderService();
 
 export const App = () => {
     return (
@@ -23,7 +20,7 @@ export const App = () => {
                 <Route 
                     exact
                     path='/' 
-                    render={() => <Dashboard reminderService={reminderService} />}
+                    render={() => <Dashboard />}
                 />
                 <Route 
                     exact
@@ -32,9 +29,7 @@ export const App = () => {
                 />
                 <Route 
                     path='/reminders/:id'
-                    render = { (props) => {
-                        return <ReminderDetails reminder={ reminderService.findOne(+props.match.params.id) } />
-                    }}
+                    component = { ReminderDetails }
                 />
             </Switch>
         </main>

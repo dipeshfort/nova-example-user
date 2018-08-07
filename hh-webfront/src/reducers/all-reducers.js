@@ -1,24 +1,19 @@
 
 import { combineReducers  } from "redux";
-import { v4 as uuid } from 'uuid';
+import {
+    ReminderService
+} from '../services/reminder.service';
 
 export const allReducers = combineReducers({
     reminders: (state = [], action) => {
-
         switch (action.type) {
-            case 'CREATE_REMINDER':
-                const reminder = action.payload;
-                reminder.id = uuid();
-                reminder.status = "OPEN";
-                state.push(reminder);
+            case 'RECEIVE_REMINDERS': 
+                return action.payload;
+            case 'ADD_REMINDER':
+                state.push(action.payload);
                 return state;
             case 'UPDATE_REMINDER':
                 return update(state, action.payload);
-            case 'MARK_CLOSED':
-                return update(state, {
-                    id: action.payload,
-                    status: 'CLOSED'
-                });
             case 'MARK_OPEN': 
                 return update(state, {
                     id: action.payload,
@@ -30,12 +25,12 @@ export const allReducers = combineReducers({
     }
 });
 
-function update(reminders, updatePart) {
+function update(reminders, updatedReminder) {
     return reminders.map((reminder) => {
-        if (reminder.id !== updatePart.id) {
+        if (reminder.id !== updatedReminder.id) {
             return reminder;
         }
 
-        return Object.assign({}, reminder, updatePart);
+        return Object.assign({}, reminder, updatedReminder);
     })
 }

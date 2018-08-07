@@ -1,0 +1,108 @@
+{
+  "reminders": [
+    {
+      "id": 1,
+      "title": "Pay house rent",
+      "comments": "",
+      "amount": 900,
+      "remindDate": "2018-08-05T00:00:00+03:00",
+      "status": "CLOSED"
+    },
+    {
+      "id": 2,
+      "title": "Pay electricitity",
+      "comments": "",
+      "amount": "400",
+      "remindDate": "2018-08-05",
+      "status": "CLOSED"
+    },
+    {
+      "id": 3,
+      "title": "Pay house rent",
+      "comments": "",
+      "amount": 900,
+      "remindDate": "2018-09-05T00:00:00+03:00",
+      "status": "CLOSED"
+    },
+    {
+      "id": 4,
+      "title": "House Loan",
+      "comments": "",
+      "amount": 40,
+      "remindDate": "2018-09-04T00:00:00+03:00",
+      "status": "CLOSED"
+    },
+    {
+      "id": 5,
+      "title": "Pay house rent",
+      "comments": "",
+      "amount": 900,
+      "remindDate": "2018-10-20T00:00:00+03:00",
+      "status": "OPEN"
+    },
+    {
+      "id": 6,
+      "title": "Pay electricity",
+      "comments": "",
+      "amount": 40,
+      "remindDate": "2018-11-03T00:00:00+03:00",
+      "status": "OPEN"
+    },
+    {
+      "id": 7,
+      "title": "Pay house rent",
+      "comments": "hello there",
+      "amount": 900,
+      "remindDate": "2018-11-04",
+      "status": "OPEN"
+    },
+    {
+      "id": 8,
+      "title": "House Loan",
+      "comments": "",
+      "amount": 40,
+      "remindDate": "2018-11-04T00:00:00+03:00",
+      "status": "OPEN"
+    },
+    {
+      "title": "test",
+      "comments": "",
+      "amount": 0,
+      "remindDate": "2018-08-05",
+      "id": "8038c3c7-231f-46e4-b509-bd71be2b50de",
+      "status": "CLOSED"
+    },
+    {
+      "title": "test2",
+      "comments": "",
+      "amount": 0,
+      "remindDate": "2018-08-05",
+      "status": "CLOSED",
+      "id": 9
+    },
+    {
+      "title": "test 3",
+      "comments": "",
+      "amount": 0,
+      "remindDate": "2018-08-05",
+      "id": "7d524f12-e544-45ce-9ea3-e1f99fc17a84",
+      "status": "CLOSED"
+    },
+    {
+      "title": "Hello",
+      "comments": "",
+      "amount": 0,
+      "remindDate": "2018-08-05",
+      "status": "CLOSED",
+      "id": 10
+    },
+    {
+      "title": "TESTING",
+      "comments": "",
+      "amount": 0,
+      "remindDate": "2018-08-25",
+      "status": "CLOSED",
+      "id": 11
+    }
+  ]
+}

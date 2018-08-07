@@ -1,29 +1,48 @@
 
-import {
-    reminders
-} from '../mocks/reminders';
 import { dateFormat } from '../utils';
+const REMINDERS_API = 'http://localhost:5000/reminders';
 
 export class ReminderService {
-    constructor() {
+    static async fetchAll() {
+        const reminders = await fetch(REMINDERS_API).then((resp) => {
+            return resp.json()
+        });
+
         this.reminders = reminders.map((reminder) => {
             reminder.remindDate = dateFormat(new Date(reminder.remindDate));
             return reminder;
         });
+        return Promise.resolve(this.reminders);
     }
 
-    getAll() {
-        return this.reminders;
+    static async create(reminderData) {
+        const data = {
+            ...reminderData,
+            status: "OPEN"
+        };
+        return await fetch(REMINDERS_API, {
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(data)
+        }).then(resp => resp.json());
     }
 
-    create(reminderData) {
-        console.log("CREATE", reminderData);
-    }
-
-    findOne(id) {
-        const result = this.reminders.find((reminder) => {
-            return reminder.id === id;
-        });
-        return result;
+    static async update(reminderId, reminderData) {
+        const data = {
+            ...reminderData,
+        };
+        const api = `${REMINDERS_API}/${reminderId}`;
+        console.info(`Updating ${api}`, reminderData);
+        return await fetch(api, {
+            method: 'PATCH',
+            cache: 'no-cache',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(data)
+        }).then(resp => resp.json());
     }
 }

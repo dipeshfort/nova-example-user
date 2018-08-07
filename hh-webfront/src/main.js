@@ -4,23 +4,41 @@ import { render } from 'react-dom';
 import {
     BrowserRouter
 } from 'react-router-dom';
+
+// ==========================
+// ======== REDUX ===========
+// ==========================
 import {
     Provider
 } from 'react-redux';
 import {
-    createStore
+    createStore,
+    applyMiddleware
 } from 'redux';
-import './styles.css';
-import { App } from './App';
-import { reminders } from "./mocks/reminders";
 
 import {
     allReducers
 } from './reducers/all-reducers';
+import thunkMiddleware from 'redux-thunk';
 
-const store = createStore(allReducers, {
-    reminders
+const store = createStore(allReducers, applyMiddleware(
+    thunkMiddleware
+));
+
+ReminderService.fetchAll().then((reminders) => {
+    store.dispatch({
+        type: 'RECEIVE_REMINDERS',
+        payload: reminders
+    })
 });
+
+// ======== /REDUX ===========
+
+import './styles.css';
+import {
+    App
+} from './App';
+import { ReminderService } from './services/reminder.service';
 
 render((
     <Provider store={store}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ReminderList } from './ReminderList';
 import { connect } from 'react-redux';
 import { DashboardTime } from './DashboardTime';
+import { ReminderService } from "../services/reminder.service";
 
 // Styles
 import './Dashboard.css';
@@ -43,15 +44,23 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         markClosed: (reminderId) => {
-            dispatch({
-                type: 'MARK_CLOSED',
-                payload: reminderId
+            ReminderService.update(reminderId, {
+                status: 'CLOSED'
+            }).then((updatedReminder) => {
+                dispatch({
+                    type: 'UPDATE_REMINDER',
+                    payload: updatedReminder
+                });
             });
         },
         markOpen: (reminderId) => {
-            dispatch({
-                type: 'MARK_OPEN',
-                payload: reminderId
+            ReminderService.update(reminderId, {
+                status: 'OPEN'
+            }).then((updatedReminder) => {
+                dispatch({
+                    type: 'UPDATE_REMINDER',
+                    payload: updatedReminder
+                });
             });
         }
     }

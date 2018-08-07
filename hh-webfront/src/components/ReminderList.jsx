@@ -44,12 +44,10 @@ export const ReminderList = (props) => {
                                 (index > 0) &&
                                 <path d={`M${12} ${prevPosY} V ${posY} Z`} fill="transparent" stroke="#89C5E3" strokeWidth="4" />
                             }
-                            <g 
-                                onClick={(_) => { props.onSelect(reminder.id); } }
-                                style={{ cursor: "pointer" }}
+                            <g style={{ cursor: "pointer" }}
                                 transform={`translate(${posX}, ${posY})`}
                             >
-                                <circle cx="10" cy="10" r="10" strokeWidth="2" stroke="#002B7F" fill="transparent" />
+                                <circle onClick={(_) => { props.onSelect(reminder.id); }} cx="10" cy="10" r="10" strokeWidth="2" stroke="#002B7F" fill="transparent" />
                                 <text x="25" y="15" >
                                     <tspan fill="purple" className="text-date">{ reminder.remindDate }</tspan>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
