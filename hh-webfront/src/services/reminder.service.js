@@ -18,7 +18,8 @@ export class ReminderService {
     static async create(reminderData) {
         const data = {
             ...reminderData,
-            status: "OPEN"
+            status: "OPEN",
+            created: new Date()
         };
         const api = REMINDERS_API;
         console.info(`Creating reminder ${api}`);

@@ -2,9 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const ReminderList = (props) => {
+    // Sort by dueDate ascending and createDate decending
     const reminders = props.reminders.sort((a, b) => {
         if (a.remindDate === b.remindDate) {
-            return 0;
+            if (a.created === b.created) {
+                return 0;
+            }
+            return (a.created < b.created) ? 1 : -1;
         }
 
         return (a.remindDate > b.remindDate)? 1: -1;
