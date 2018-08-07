@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "dev": "nodemon ./bin/www | bunyan",
+    "start": "node ./bin/www | bunyan"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^6.0.0",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
-    "pg": "^7.4.3"
+    "pg": "^7.4.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
