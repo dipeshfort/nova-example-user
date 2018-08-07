@@ -6,7 +6,7 @@ import { ReminderList } from "./components/ReminderList";
 const App = () => {
     return (
         <section>
-            <h1> Hello react!</h1>
+            <h1> Hello Angeliti!</h1>
             <ReminderList />
         </section>
     );
