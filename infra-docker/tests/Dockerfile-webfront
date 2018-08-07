@@ -1,0 +1,10 @@
+FROM node:8.11
+
+USER root
+WORKDIR /data/app
+
+ARG BUILD_NO
+
+COPY . .
+RUN echo "Build number: $BUILD_NO" \
+    && npm install

@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  hh-webfront:
+    build:
+      context: ../../hh-webfront
+      dockerfile: ../infra-docker/tests/Dockerfile-webfront
+      args: 
+        - BUILD_NO=${BUILD_NO}
+      cache_from:
+        - node:8.11
+    container_name: local.hh-webfront
+    image: hh-webfront
+    command: ["npm", "test"]
+  hh-redis:
+    image: redis:3.2.10
+    container_name: local.hh-redis
+
