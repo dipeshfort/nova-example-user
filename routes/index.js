@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { 
     title: process.env.APPLICATION_NAME, 
-    version: "v1.0.1" 
+    version: "v1.0.2" 
   });
 });
 
