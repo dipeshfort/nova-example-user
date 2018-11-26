@@ -5,17 +5,18 @@ const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 const query = client.query(`
-    CREATE TABLE IF NOT EXISTS reminders(
+    DROP TABLE users;
+    CREATE TABLE users(
         id UUID NOT NULL PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        comments TEXT,
-        amount float8 NOT NULL,
-        remind_date TIMESTAMP NOT NULL,
+        firstname VARCHAR(255) NOT NULL,
+        lastname VARCHAR(255) NOT NULL,
+        email VARCHAR(64) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
         created TIMESTAMP DEFAULT current_timestamp,
-        status VARCHAR(10)
+        updated TIMESTAMP DEFAULT current_timestamp
     );
-`).then((_) => {
-    console.log("DB Init");
+`).then((operationResult) => {
+    console.log("DB Init", JSON.stringify(operationResult));
     closeConnection();
 }).catch((err) => {
     console.log("ERROR", err);
