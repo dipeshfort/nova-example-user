@@ -1,6 +1,6 @@
 {
-  "name": "reminder-api",
-  "title": "Reminder Api",
+  "name": "user-service",
+  "title": "User Service",
   "version": "1.0.0",
   "private": true,
   "scripts": {
