@@ -19,4 +19,4 @@ POSTGRES_DB
 
 ### Persistence
 
-~/postgresqldata:/var/lib/postgresql/data
+/Users/$USER/postgresqldata:/var/lib/postgresql/data
