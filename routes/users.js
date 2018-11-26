@@ -3,31 +3,11 @@ const router = express.Router();
 const logger = require('../utils/logger');
 const repository = require('../repository/users-repository');
 
-router.post('/login', async (req, res) => {
+
+router.get('/', async (req, res) => {
     try {
-        const reminders = await repository.fetchAll();
-        res.json(reminders);
-    } catch (err) {
-        error500(err, res);
-    }
-});
-
-router.post('/signup', async (req, res) => {
-    const { firstname, lastname, email, password } = req.body;
-
-    const userData = {
-        firstname,
-        lastname,
-        email,
-        passwordPlain: password,
-    };
-
-    try {
-        const userId = await repository.create(userData);
-        const user = await repository.fetchOne(userId);
-        logger.info(`Sucessfully created users for data: ${JSON.stringify({...userData, password: "****"})}`);
-        res.status(201);
-        res.json(user);
+        const users = await repository.fetchAll();
+        res.json(users);
     } catch(err) {
         error500(err, res);
     }

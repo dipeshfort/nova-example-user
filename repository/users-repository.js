@@ -10,17 +10,16 @@ class UsersRepository {
         this.context = context;
     } 
     async fetchAll() {
-        const result = await this.context.query('SELECT * from reminders');
-        logger.trace(`Returned ${result.rows.length} reminders.`);
+        const result = await this.context.query('SELECT * from users');
+        logger.trace(`Returned ${result.rows.length} users.`);
         return result.rows.map((rowItem) => {
             return {
                 id: rowItem.id,
-                title: rowItem.title,
-                comments: rowItem.comments,
-                amount: rowItem.amount,
-                remindDate: rowItem.remind_date,
+                firstname: rowItem.firstname,
+                lastname: rowItem.lastname,
+                email: rowItem.email,
                 created: rowItem.created,
-                status: rowItem.status
+                updated: rowItem.updated,
             };
         });
     }
