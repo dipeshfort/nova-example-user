@@ -8,6 +8,7 @@ require('../configEnv').config();
 var app = require('../app');
 var debug = require('debug')(process.env.APPLICATION_NAME);
 var http = require('http');
+const logger = require('../utils/logger');
 
 /**
  * Get port from environment and store in Express.
@@ -88,4 +89,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  logger.info(`Server started at: http://localhost:${port}`);
 }
