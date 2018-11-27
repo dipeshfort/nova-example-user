@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
         }, process.env.JWT_SECRET, {
             algorithm: process.env.JWT_ALG,
             issuer: 'nova-auth',
-            expiresIn: process.env.JWT_EXPIRY
+            expiresIn: +process.env.JWT_EXPIRY
         });
         res.json({
             token
@@ -35,6 +35,7 @@ router.post('/signup', async (req, res) => {
         firstname,
         lastname,
         email,
+        role: 'USER',
         passwordPlain: password,
     };
 

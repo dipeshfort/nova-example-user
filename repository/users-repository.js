@@ -12,15 +12,8 @@ class UsersRepository {
     async fetchAll() {
         const result = await this.context.query('SELECT * from users');
         logger.trace(`Returned ${result.rows.length} users.`);
-        return result.rows.map((rowItem) => {
-            return {
-                id: rowItem.id,
-                firstname: rowItem.firstname,
-                lastname: rowItem.lastname,
-                email: rowItem.email,
-                created: rowItem.created,
-                updated: rowItem.updated,
-            };
+        return result.rows.map((row) => {
+            return this.toUser(row);
         });
     }
 
@@ -35,22 +28,13 @@ class UsersRepository {
         if (!result.rows.length) {
             throw new Error('ERROR_NOT_FOUND::User not found');
         }
-        const rowItem = result.rows[0];
-
-        return {
-            id: rowItem.id,
-            firstname: rowItem.firstname,
-            lastname: rowItem.lastname,
-            email: rowItem.email,
-            created: rowItem.created,
-            updated: rowItem.updated,
-        }
+        return this.toUser(result.rows[0]);
     }
 
     async fetchByCredentials(credentials) {
         const { email, passwordPlain } = credentials;
         const query = {
-            name: 'fetch-user',
+            name: 'fetch-user-by-cred',
             text: 'SELECT * FROM users WHERE email = $1 AND password = $2',
             values: [email, this.encryptPassword(passwordPlain)]
         };
@@ -61,26 +45,17 @@ class UsersRepository {
             error.code = "ERR_NOT_FOUND";
             throw error;
         }
-        const rowItem = result.rows[0];
-
-        return {
-            id: rowItem.id,
-            firstname: rowItem.firstname,
-            lastname: rowItem.lastname,
-            email: rowItem.email,
-            created: rowItem.created,
-            updated: rowItem.updated,
-        }
+        return this.toUser(result.rows[0]);
     }
 
     async create(userDataInput) {
         const userId = v4();
-        const { firstname, lastname, email, passwordPlain } = userDataInput;
+        const { firstname, lastname, email, passwordPlain, role } = userDataInput;
 
         const query = {
             name: 'insert-user',
-            text: 'INSERT INTO users(id, firstname, lastname, email, password) VALUES($1, $2, $3, $4, $5)',
-            values: [userId, firstname, lastname, email, this.encryptPassword(passwordPlain)]
+            text: 'INSERT INTO users(id, firstname, lastname, email, password, role) VALUES($1, $2, $3, $4, $5, $6)',
+            values: [userId, firstname, lastname, email, this.encryptPassword(passwordPlain), role]
         };
         try {
             const result = await this.context.query(query)
@@ -168,6 +143,18 @@ class UsersRepository {
         };
         const operationResult = await this.context.query(query)
         return operationResult.rowCount;
+    }
+
+    toUser(row) {
+        return {
+            id: row.id,
+            firstname: row.firstname,
+            lastname: row.lastname,
+            email: row.email,
+            role: row.role,
+            created: row.created,
+            updated: row.updated,
+        }
     }
 
     encryptPassword(passwordPlain) {
