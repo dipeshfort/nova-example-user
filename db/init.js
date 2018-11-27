@@ -4,7 +4,7 @@ const pg = require('pg');
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
-const query = client.query(`
+client.query(`
     DROP TABLE users;
     CREATE TABLE users(
         id UUID NOT NULL PRIMARY KEY,

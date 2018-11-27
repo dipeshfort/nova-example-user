@@ -5,6 +5,9 @@ const repository = require('../repository/users-repository');
 const jwt = require('jsonwebtoken');
 
 router.use((req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        next();
+    }
     const authorization = req.header('authorization');
     if (!authorization) {
         res.status(403);
